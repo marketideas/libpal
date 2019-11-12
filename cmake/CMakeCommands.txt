@@ -1,0 +1,4 @@
+add_custom_target(run
+	COMMAND ${PROJECT_ROOT}/build/${PROJECT_NAME}
+	DEPENDS ${PROJECT_ROOT}/build/${PROJECT_NAME}
+)

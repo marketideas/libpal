@@ -1,0 +1,32 @@
+
+set (CMAKE_CXX_STANDARD 11)
+
+set(OPT "-Wall -O3 -g3" )
+
+set(PROJECT_DEFINES 
+" \
+${PROJECT_DEFINES} \
+-DAPPVERSION=${APPVERSION} \
+" 
+)
+
+set(CMAKE_C_FLAGS
+" \
+${PROJECT_DEFINES} \
+-fbounds-check \
+-ffunction-sections \
+-fdata-sections \
+-fno-strict-aliasing \
+-funwind-tables \
+"
+)
+set(CMAKE_CXX_FLAGS "${PROJECT_DEFINES} ")
+
+set(CMAKE_EXE_LINKER_FLAGS
+" \
+${OPT} \
+")
+
+
+
+
