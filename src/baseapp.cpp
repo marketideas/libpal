@@ -258,7 +258,7 @@ char CLASS::getKey(void)
 	if ( r > 0 )
 	{
 		char c;
-		int x = read( fileno( stdin ), &c, 1 );
+		int x = (int)read( fileno( stdin ), &c, 1 );
 		if (x == 1)
 		{
 			res = c;
