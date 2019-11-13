@@ -1,5 +1,5 @@
 #pragma once
-#include <palPoco.h>
+#include "palPoco.h"
 #include "pallogger.h"
 
 #undef CLASS

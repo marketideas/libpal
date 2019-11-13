@@ -1,5 +1,5 @@
 #pragma once
-#include <palPoco.h>
+#include "palPoco.h"
 #include "pal_config.h"
 #include "baseapp.h"
 #include "eventtask.h"

@@ -1,4 +1,4 @@
-#include <palPoco.h>
+#include "palPoco.h"
 
 namespace PAL_NAMESPACE {
 
