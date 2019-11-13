@@ -16,6 +16,10 @@
 
 #define CLASS PAL_BASEAPP
 
+#ifdef NO_SIGNAL_HANDLING
+#define POCO_NO_SIGNAL_HANDLER NO_SIGNAL_HANDLING
+#endif
+
 #ifdef SERVERAPP
 #define POCOAPP_CLASS Poco::Util::ServerApplication
 #else
@@ -48,8 +52,7 @@ public:
 
 	static void install()
 	{
-#ifndef NO_SIGNAL_HANDLING
-//#ifndef POCO_NO_SIGNAL_HANDLER
+#ifndef POCO_NO_SIGNAL_HANDLER
 		struct sigaction sa;
 		sa.sa_handler = handleSignal;
 		sa.sa_flags   = 0;
@@ -70,7 +73,6 @@ public:
 		sigaction(SIGSYS,  &sa, 0);
 		sigaction(SIGPWR,  &sa, 0);
 		sigaction(SIGTERM,  &sa, 0);
-//#endif
 #endif
 	}
 };

@@ -1,6 +1,6 @@
 #pragma once
-#include <config.h>
-#include <pal_config.h>
+#include "config.h"
+#include "pal_config.h"
 
 #define QUOTE(str) #str
 #define STRINGIFY(str) QUOTE(str)
