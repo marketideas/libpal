@@ -309,7 +309,7 @@ uint8_t SetColor(uint8_t icolor)
 	uint8_t col = 0;
 	uint8_t bcol = 0;
 	int attr = 0;
-	int battr = 0;
+	//int battr = 0;
 	uint8_t x = icolor & 0x07;
 
 	switch (x)
@@ -357,31 +357,24 @@ uint8_t SetColor(uint8_t icolor)
 	{
 		case BG_RED:
 			bcol = 1;
-			battr = 1;
 			break;
 		case BG_YELLOW:
 			bcol = 3;
-			battr = 1;
 			break;
 		case BG_BLUE:
 			bcol = 4;
-			battr = 1;
 			break;
 		case BG_PURPLE:
 			bcol = 5;
-			battr = 1;
 			break;
 		case BG_GREEN:
 			bcol = 2;
-			battr = 1;
 			break;
 		case BG_CYAN:
 			bcol = 6;
-			battr = 1;
 			break;
 		case BG_WHITE:
 			bcol = 7;
-			battr = 1;
 			break;
 		default:
 			bcol = 0;

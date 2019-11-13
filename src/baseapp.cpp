@@ -289,13 +289,10 @@ int CLASS::runApp(void)
 {
 	int res = -1;
 	int oldLogLevel = logger().getLevel();
-	uint64_t lasttick, daytick, hourtick, mintick, tick;
 
 	ThreadPool tpool(std::string("apppool"), 1, 4, 1, 256);
 	TaskManager tm(tpool);
 
-
-	lasttick = tick = mintick = hourtick = daytick = GetTickCount();
 
 	int h = getInt("option.help", 0);
 	int v = getInt("option.version", 0);
@@ -306,9 +303,10 @@ int CLASS::runApp(void)
 		SetTerminal();
 		try
 		{
+#ifndef NO_SIGNAL_HANDLING
 			qa_throw_on_signal;
 			_qa_signalHandler.install();
-
+#endif
 			if (InitApp())
 			{
 

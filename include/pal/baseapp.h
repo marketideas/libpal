@@ -3,7 +3,9 @@
 #include "palPoco.h"
 
 #include <sys/time.h>
+#ifndef NO_SIGNAL_HANDLING
 #include <sys/timerfd.h>
+#endif
 #include <iostream>
 #include <stdexcept>
 #include <termios.h>
@@ -46,7 +48,8 @@ public:
 
 	static void install()
 	{
-#ifndef POCO_NO_SIGNAL_HANDLER
+#ifndef NO_SIGNAL_HANDLING
+//#ifndef POCO_NO_SIGNAL_HANDLER
 		struct sigaction sa;
 		sa.sa_handler = handleSignal;
 		sa.sa_flags   = 0;
@@ -67,6 +70,7 @@ public:
 		sigaction(SIGSYS,  &sa, 0);
 		sigaction(SIGPWR,  &sa, 0);
 		sigaction(SIGTERM,  &sa, 0);
+//#endif
 #endif
 	}
 };
