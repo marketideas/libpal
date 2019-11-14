@@ -185,18 +185,47 @@ void CLASS::initialize(Application & self)
 {
 	POCOAPP_CLASS::initialize(self);
 
-	//loadConfiguration(); // load default configuration files, if present
-
 	try
 	{
-		std::string f = getConfig("option.config - file", "");
+		std::string f,appname;
+		appname=self.config().getString("application.name","");;
+
+		try
+		{
+			f=Poco::Path::config()+appname+"/"+appname+".ini";
+			//cout << "first config " << f << endl;
+			loadConfiguration(f);
+		}
+		catch(...)
+		{
+		}
+		try
+		{
+			f=Poco::Path::current()+appname+".ini";
+			//cout << "second config " << f << endl;
+			loadConfiguration(f);
+		}
+		catch(...)
+		{
+		}
+		try
+		{
+			f=Poco::Path::configHome()+appname+".ini";
+			//cout << "third config " << f << endl;
+			loadConfiguration(f);
+		}
+		catch(...)
+		{
+		}
+
+		f = getConfig("option.config - file", "");
 		if (f == "")
 		{
-			loadConfiguration();
+			//loadConfiguration(f);
 		}
 		if (f != "")
 		{
-			if (isDebug())
+			if (isDebug()>1)
 			{
 				cout << "Loading Config file | " << f << " | " << endl;
 			}

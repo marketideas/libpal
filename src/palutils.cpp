@@ -312,6 +312,11 @@ uint8_t SetColor(uint8_t icolor)
 	//int battr = 0;
 	uint8_t x = icolor & 0x07;
 
+	if (!isatty(STDOUT_FILENO))
+	{
+		return(0);
+	}
+
 	switch (x)
 	{
 		case CL_RED:
