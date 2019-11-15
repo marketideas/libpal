@@ -71,15 +71,16 @@
 #include <Poco/Pipe.h>
 #include <Poco/PipeStream.h>
 
-#include <Poco/Net/MailMessage.h>
-#include <Poco/Net/MailRecipient.h>
-#include <Poco/Net/SMTPClientSession.h>
-#include <Poco/Net/NetException.h>
-
 #include <Poco/JSON/JSON.h>
 #include <Poco/JSON/Parser.h>
 #include <Poco/JSON/PrintHandler.h>
 #include <Poco/JSON/Stringifier.h>
+
+#ifdef USE_NET
+#include <Poco/Net/MailMessage.h>
+#include <Poco/Net/MailRecipient.h>
+#include <Poco/Net/SMTPClientSession.h>
+#include <Poco/Net/NetException.h>
 
 #include <Poco/Crypto/CipherFactory.h>
 #include <Poco/Crypto/Cipher.h>
@@ -96,6 +97,7 @@
 #include <Poco/Crypto/RSAKey.h>
 #include <Poco/Crypto/RSAKeyImpl.h>
 #include <Poco/Crypto/X509Certificate.h>
+#endif
 
 #include <Poco/Util/Option.h>
 #include <Poco/Util/OptionSet.h>
@@ -116,7 +118,7 @@
 #include <Poco/NullStream.h>
 
 
-
+#ifdef USE_NET
 // Network includes
 #include <Poco/Net/Net.h>
 #include "Poco/Net/SSLManager.h"
@@ -137,13 +139,6 @@
 #include "Poco/Net/TCPServerParams.h"
 #include "Poco/URI.h"
 
-#include "Poco/Runnable.h"
-#include "Poco/RunnableAdapter.h"
-#include "Poco/Activity.h"
-
-#include "Poco/Thread.h"
-#include "Poco/ThreadPool.h"
-
 #include <Poco/Net/HTTPClientSession.h>
 #include <Poco/Net/HTTPSClientSession.h>
 
@@ -156,6 +151,16 @@
 #include <Poco/Net/HTTPServerRequest.h>
 #include <Poco/Net/HTTPServerResponse.h>
 #include <Poco/Net/HTTPServerParams.h>
+
+#endif
+
+#include "Poco/Runnable.h"
+#include "Poco/RunnableAdapter.h"
+#include "Poco/Activity.h"
+
+#include "Poco/Thread.h"
+#include "Poco/ThreadPool.h"
+
 #include <Poco/Util/AbstractConfiguration.h>
 #include <Poco/NotificationCenter.h>
 #include <Poco/NotificationQueue.h>
@@ -166,7 +171,9 @@
 
 using namespace std;
 using namespace Poco;
+#ifdef USE_NET
 using namespace Poco::Net;
+#endif
 //using namespace Poco::Crypto;
 
 using Poco::format;
