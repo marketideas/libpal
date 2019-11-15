@@ -85,16 +85,17 @@ public:
 public:
 	static Poco::NullOutputStream lognullstream;
 
-	CLASS(std::string pattern) {}
+	CLASS(std::string pattern) { UNUSED(pattern);}
 	CLASS() {}
 	~CLASS() {}
 	void init() {}
-	void SetPattern(const std::string &newpat) {}
-	int SetLevel(int newLevel) {return 0;}
-	bool enable(bool val) {return false;}
-	std::string createLogFile(std::string path) {return ("");}
+	void SetPattern(const std::string &newpat) {UNUSED(newpat);}
+	int SetLevel(int newLevel) {UNUSED(newLevel); return 0;}
+	bool enable(bool val) {UNUSED(val); return false;}
+	std::string createLogFile(std::string path) {UNUSED(path); return ("");}
 
-	static std::ostream& logstream(int outlevel, const char *file, const int line) {return lognullstream; }
+	static std::ostream& logstream(int outlevel, const char *file, const int line) {
+		UNUSED(outlevel); UNUSED(file); UNUSED(line); return lognullstream; }
 #endif
 };
 

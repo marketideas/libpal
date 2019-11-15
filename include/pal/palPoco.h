@@ -18,7 +18,7 @@
 #include <ostream>
 #include <fstream>
 #include <sstream>
-
+#include <stack>
 
 // base includes
 
@@ -33,7 +33,9 @@
 #include <Poco/Random.h>
 #include <Poco/RandomStream.h>
 
+#ifndef NO_SIGNAL_HANDLING
 #include <Poco/SignalHandler.h>
+#endif
 
 #include <Poco/Timestamp.h>
 
@@ -57,6 +59,7 @@
 #include <Poco/ScopedLock.h>
 #include <Poco/MemoryStream.h>
 
+#ifdef USE_XML
 #include <Poco/DOM/DOMParser.h>
 #include <Poco/DOM/Document.h>
 #include <Poco/DOM/NodeIterator.h>
@@ -65,6 +68,7 @@
 
 #include <Poco/DOM/AutoPtr.h>
 #include <Poco/SAX/InputSource.h>
+#endif
 
 #include <Poco/Util/Application.h>
 #include <Poco/Util/ServerApplication.h>
@@ -73,10 +77,12 @@
 #include <Poco/Pipe.h>
 #include <Poco/PipeStream.h>
 
+#ifdef USE_JSON
 #include <Poco/JSON/JSON.h>
 #include <Poco/JSON/Parser.h>
 #include <Poco/JSON/PrintHandler.h>
 #include <Poco/JSON/Stringifier.h>
+#endif
 
 #ifdef USE_NET
 #include <Poco/Net/MailMessage.h>

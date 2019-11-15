@@ -11,14 +11,16 @@ Poco::NullOutputStream nullstream;
 
 int isDebug(void)
 {
-	static bool checked = false;
 	static int cached = 0;
+#ifdef DEBUG
+	static bool checked = false;
 
 	if (!checked)
 	{
 		checked = true;
 		cached = getInt("option.debug", 0);
 	}
+#endif
 	return (cached);
 }
 
