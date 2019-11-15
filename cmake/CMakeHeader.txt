@@ -13,5 +13,3 @@ set(RELEASE_OPT "-Wall -Wextra -Werror  -O3" )
 
 set(CMAKE_CXX_FLAGS_DEBUG "${DEBUG_OPT} ")
 set(CMAKE_CXX_FLAGS_RELEASE "${RELEASE_OPT}")
-
-
