@@ -2,6 +2,8 @@
 #include "config.h"
 #include "pal_config.h"
 
+#define UNUSED(expr) do { (void)(expr); } while (0)
+
 #define QUOTE(str) #str
 #define STRINGIFY(str) QUOTE(str)
 

@@ -81,7 +81,7 @@ void CLASS::handleSingleOption(const std::string &name, const std::string &value
 	int x;
 
 	std::string dname;
-	std::string dvalue;
+	std::string dvalue=value;
 	dname = "option." + name;
 	x = getInt(dname, 0);
 	x++;
@@ -320,6 +320,9 @@ int CLASS::runCommandLineApp(void)
 
 int CLASS::runServerApp(PAL_EVENTMANAGER * em)
 {
+	if (em)
+	{
+	}
 	// override this class to create your EventTasks
 	return (-1);
 }

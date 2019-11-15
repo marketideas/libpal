@@ -120,6 +120,7 @@ void CLASS::onQuit()
 
 void CLASS::onUser(uint32_t idx)
 {
+	if(idx) {}
 
 }
 void CLASS::onReload(void)
