@@ -98,6 +98,17 @@ void CLASS::handleParamOption(const std::string& name, const std::string& value)
 	config().setString(dname, dvalue);
 }
 
+void CLASS::displayVersion()
+{
+	std::string s = "";
+#ifdef DEBUG
+	s = "(d)";
+#endif
+	cout << "Application Version: " << (std::string)STRINGIFY(APPVERSION) << s << endl;
+	cout << "PAL Library Version: " << getLibVersion() << endl;
+	cout << "Poco Library Version: " << getPocoVersion() << endl;
+}
+
 void CLASS::displayHelp()
 {
 	std::string usage = "<options>";
@@ -108,13 +119,17 @@ void CLASS::displayHelp()
 #ifdef HELP_PURPOSE
 	purpose = HELP_PURPOSE;
 #endif
+
 	HelpFormatter helpFormatter(options());
 	helpFormatter.setCommand(commandName());
 	helpFormatter.setUsage(usage);
 	helpFormatter.setHeader(purpose);
-	helpFormatter.format(std::cout);
+	helpFormatter.setFooter(" ");
 
-	if (getInt("option.debug", 0) > 0)
+	cerr << endl;
+	helpFormatter.format(std::cerr);
+
+	if (getInt("option.debug", 0) > 1)
 	{
 		std::cout << endl << endl << endl;
 		printProperties("");
@@ -140,14 +155,7 @@ int CLASS::main(const ArgVec& args)
 		}
 		if (v > 0)
 		{
-			std::string s = "";
-#ifdef DEBUG
-			s = "(d)";
-#endif
-			cout << "Application Version: " << (std::string)STRINGIFY(APPVERSION) << s << endl;
-			cout << "PAL Library Version: " << getLibVersion() << endl;
-			cout << "Poco Library Version: " << getPocoVersion() << endl;
-
+			displayVersion();
 		}
 	}
 	return res;
@@ -187,37 +195,38 @@ void CLASS::initialize(Application & self)
 
 	try
 	{
-		std::string f,appname;
-		appname=self.config().getString("application.name","");;
+		std::string f, appname;
+		appname = self.config().getString("application.name", "");;
 
 		try
 		{
-			f=Poco::Path::config()+appname+"/"+appname+".ini";
+			f = Poco::Path::config() + appname + "/" + appname + ".ini";
 			//cout << "first config " << f << endl;
 			loadConfiguration(f);
 		}
-		catch(...)
+		catch (...)
 		{
 		}
 		try
 		{
-			f=Poco::Path::current()+appname+".ini";
+			f = Poco::Path::current() + appname + ".ini";
 			//cout << "second config " << f << endl;
 			loadConfiguration(f);
 		}
-		catch(...)
+		catch (...)
 		{
 		}
 		try
 		{
-			f=Poco::Path::configHome()+appname+".ini";
+			f = Poco::Path::configHome() + appname + ".ini";
 			//cout << "third config " << f << endl;
 			loadConfiguration(f);
 		}
-		catch(...)
+		catch (...)
 		{
 		}
 
+#if 0
 		f = getConfig("option.config - file", "");
 		if (f == "")
 		{
@@ -225,21 +234,22 @@ void CLASS::initialize(Application & self)
 		}
 		if (f != "")
 		{
-			if (isDebug()>1)
+			if (isDebug() > 1)
 			{
 				cout << "Loading Config file | " << f << " | " << endl;
 			}
 			loadConfiguration(f);
 		}
+#endif
 	}
 	catch (...)
 	{
 	}
 
-	char *tz1=getenv("TZ");
-	if ((tz1==NULL) || (strlen(tz1)==0))
+	char *tz1 = getenv("TZ");
+	if ((tz1 == NULL) || (strlen(tz1) == 0))
 	{
-		tz1=(char *)"UTC";
+		tz1 = (char *)"UTC";
 	}
 	std::string tz = getConfig("application.timezone", tz1);
 	Poco::Environment::set("TZ", tz);
@@ -347,7 +357,7 @@ int CLASS::runApp(void)
 					usleep(10);
 				}
 				res = runServerApp(evtManager);
-				
+
 				if (res == 0)
 				{
 					res = Poco::Util::Application::EXIT_OK;
