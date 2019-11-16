@@ -53,6 +53,7 @@ std::string CLASS::createLogFile(std::string path)
 	std::string  groupstr;
 	std::string logfilename, logdirname;
 
+	tmpstr=path;
 	tmpstr = getEnv("NO_DISK_LOG", "");
 	if ((tmpstr != "") || (!getBool("log.disklog", false)))
 	{
@@ -328,6 +329,8 @@ std::ostream& CLASS::logstream(int outlevel, const char *file, const int line)
 {
 	//FastMutex::ScopedLock lock(_mutex);
 
+	UNUSED(line);
+	
 	if ((outlevel <= 0) || (palloginstance == NULL) || (!enabled))
 	{
 		return (PAL_LOGGER::lognullstream);

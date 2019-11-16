@@ -1,3 +1,4 @@
+#ifdef USE_NET
 #include "httpserver.h"
 
 #define BASECLASS PAL_EVENTTASK
@@ -203,3 +204,4 @@ void CLASS::onKeyPress(char ch)
 #undef CLASS
 
 }
+#endif

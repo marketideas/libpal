@@ -119,6 +119,8 @@ protected:
 	virtual void handleSingleOption(const std::string &name, const std::string &value);
 	virtual void handleParamOption(const std::string& name, const std::string& value);
 	virtual void displayHelp();
+	virtual void displayVersion();
+
 	int main(const ArgVec& args);
 	void printProperties(const std::string& base);
 };
