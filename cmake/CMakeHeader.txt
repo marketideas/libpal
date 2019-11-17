@@ -7,9 +7,8 @@ project(${PROJECT_ID})
 set(PROJECT_NAME ${PROJECT_ID})
 set(PROJECT_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 
-#set(DEBUG_OPT "-D_DEBUG -DDEBUG -Wall -fmax-errors=3 -Werror -O0 -g3" )
-set(DEBUG_OPT "-D_DEBUG -DDEBUG -Wall -Wextra -Werror -O0 -g3" )
-set(RELEASE_OPT "-Wall -Wextra -Werror  -O3" )
+set(DEBUG_OPT "-D_DEBUG -DDEBUG -Wall -Wextra -Werror -Wno-unused-parameter -O0 -g3" )
+set(RELEASE_OPT "-Wall -Wextra -Werror  -Wno-unused-parameter -O3" )
 
 set(CMAKE_CXX_FLAGS_DEBUG "${DEBUG_OPT} ")
-set(CMAKE_CXX_FLAGS_RELEASE "${RELEASE_OPT}")
+set(CMAKE_CXX_FLAGS_RELEASE "${RELEASE_OPT} ")
