@@ -215,7 +215,7 @@ void CLASS::SendMessage(Poco::Notification::Ptr ptr)
 
 uint32_t CLASS::setTimer(uint32_t ms)
 {
-	uint32_t res = timermax;
+	uint32_t res = (uint32_t)timermax;
 	timermax = ms;
 	timerval = 0; // reset the timer
 	return (res);

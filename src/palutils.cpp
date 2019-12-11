@@ -169,7 +169,7 @@ std::string SubstEnvironment(std::string instr)
 	res = "";
 
 	state = 0;
-	len = instr.length();
+	len = (uint32_t)instr.length();
 	for (i = 0; i < len; i++)
 	{
 		ch = instr[i];
