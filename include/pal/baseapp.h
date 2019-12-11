@@ -89,8 +89,9 @@ public:
 class CLASS : public POCOAPP_CLASS
 {
 private:
+#ifndef NOT_TTY_SETUP
 	struct termios oldSettings, newSettings;
-
+#endif
 	void ResetTerminal(void);
 	void SetTerminal(void);
 
