@@ -268,16 +268,22 @@ bool CLASS::InitApp(void)
 
 void CLASS::SetTerminal(void)
 {
+#ifndef NO_TTY_SETUP
 	tcgetattr( fileno( stdin ), &oldSettings );
 	memcpy(&newSettings, &oldSettings, sizeof(oldSettings));
 	newSettings.c_lflag &= (~ICANON & ~ECHO);
 	tcsetattr( fileno( stdin ), TCSANOW, &newSettings );
+#else
+	memcpy(&newSettings, &oldSettings, sizeof(oldSettings));
+	
+#endif
 }
 
 void CLASS::ResetTerminal(void)
 {
+#ifndef NO_TTY_SETUP
 	tcsetattr( fileno( stdin ), TCSANOW, &oldSettings );
-
+#endif
 }
 
 char CLASS::getKey(void)
