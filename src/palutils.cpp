@@ -11,14 +11,16 @@ Poco::NullOutputStream nullstream;
 
 int isDebug(void)
 {
-	static bool checked = false;
 	static int cached = 0;
+#ifdef DEBUG
+	static bool checked = false;
 
 	if (!checked)
 	{
 		checked = true;
 		cached = getInt("option.debug", 0);
 	}
+#endif
 	return (cached);
 }
 
@@ -167,7 +169,7 @@ std::string SubstEnvironment(std::string instr)
 	res = "";
 
 	state = 0;
-	len = instr.length();
+	len = (uint32_t)instr.length();
 	for (i = 0; i < len; i++)
 	{
 		ch = instr[i];
@@ -311,6 +313,11 @@ uint8_t SetColor(uint8_t icolor)
 	int attr = 0;
 	//int battr = 0;
 	uint8_t x = icolor & 0x07;
+
+	if (!isatty(STDOUT_FILENO))
+	{
+		return(0);
+	}
 
 	switch (x)
 	{

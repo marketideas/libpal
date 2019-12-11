@@ -1,3 +1,5 @@
+#ifdef USE_NET
+
 #include "pal.h"
 
 #define CLASS PAL_HTTPCLIENTTASK
@@ -155,3 +157,4 @@ uint32_t CLASS::doRequest(Poco::Net::HTTPClientSession& session, Poco::Net::HTTP
 }
 
 }
+#endif

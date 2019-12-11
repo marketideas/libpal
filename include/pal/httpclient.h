@@ -1,3 +1,4 @@
+#ifdef USE_NET
 #pragma once
 #include "palPoco.h"
 #include "eventtask.h"
@@ -35,6 +36,6 @@ public:
 };
 
 }
+
 #undef CLASS
-
-
+#endif
