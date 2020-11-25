@@ -96,6 +96,7 @@ private:
 	void SetTerminal(void);
 
 protected:
+	bool initFailed;
 	PAL_LOGGER  *pallogger;
 	PAL_EVENTMANAGER *evtManager;
 	ArgVec commandargs;
