@@ -29,16 +29,16 @@ namespace PAL_NAMESPACE
 {
 
 
-#define LOG_SYSLOG   cout
-#define LOG_CONSOLE  cout
-#define LOG_STDOUT  cout
-#define LOG_STDERR  cerr
+#define LOG_SYSLOG   std::cout
+#define LOG_CONSOLE  std::cout
+#define LOG_STDOUT  std::cout
+#define LOG_STDERR  std::cerr
 
 #ifdef USE_LOGGER
 #define LOG_BASE(x,y,z) PAL_LOGGER::logstream(x,y,z)
 #else
 //#define LOG_BASE(x,y,z) PAL_LOGGER::logstream(-1,y,z)
-#define LOG_BASE(x,y,z) LOG_STDERR
+#define LOG_BASE(x,y,z) LOG_STDOUT
 #endif
 
 #define LOG_FATAL  LOG_BASE(1,__FILE__,__LINE__)

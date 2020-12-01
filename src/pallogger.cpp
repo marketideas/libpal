@@ -259,6 +259,7 @@ void CLASS::init()
 	}
 	catch (...)
 	{
+		lev="";
 	}
 	if (lev == "")
 	{

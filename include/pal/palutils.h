@@ -1,15 +1,28 @@
+#pragma once
+
 #include "palPoco.h"
 
 namespace PAL_NAMESPACE {
 
-#define CL_NORMAL 0x00
-#define CL_RED 0x01
-#define CL_YELLOW 0x02
-#define CL_GREEN 0x03
-#define CL_CYAN 0x04
-#define CL_BLUE 0x05
-#define CL_PURPLE 0x06
-#define CL_WHITE 0x07
+enum {
+    CL_NORMAL,
+    CL_RED,
+    CL_YELLOW,
+    CL_GREEN,
+    CL_CYAN,
+    CL_BLUE,
+    CL_PURPLE,
+    CL_WHITE
+};
+
+//#define CL_NORMAL 0x00
+//#define CL_RED 0x01
+//#define CL_YELLOW 0x02
+//#define CL_GREEN 0x03
+//#define CL_CYAN 0x04
+//#define CL_BLUE 0x05
+//#define CL_PURPLE 0x06
+//#define CL_WHITE 0x07
 
 #define BG_NORMAL 0x00
 #define BG_RED 0x10
