@@ -197,6 +197,7 @@ void CLASS::initialize(Application & self)
     POCOAPP_CLASS::initialize(self);
     initFailed=false;
 
+    tick=lasttick=daytick=mintick=hourtick=0;
     try
     {
         std::string f, appname;
@@ -405,6 +406,7 @@ int CLASS::runApp(void)
                         }
                         else
                         {
+#if 1
                             tick = GetTickCount();
                             if (tick >= (lasttick + 1000))
                             {
@@ -430,7 +432,7 @@ int CLASS::runApp(void)
 
                                 daytick = tick;
                             }
-
+#endif
 
                             char ch = getKey();
                             if (ch > 0)

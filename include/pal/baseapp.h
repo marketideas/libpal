@@ -96,6 +96,7 @@ private:
 	void SetTerminal(void);
 
 protected:
+	uint64_t daytick,lasttick,mintick,hourtick,tick;
 	bool initFailed;
 	PAL_LOGGER  *pallogger;
 	PAL_EVENTMANAGER *evtManager;

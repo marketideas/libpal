@@ -1,6 +1,7 @@
-#ifdef USE_NET
 
 #include "pal.h"
+
+#ifdef USE_NET
 
 #define CLASS PAL_HTTPCLIENTTASK
 #define BASE_CLASS PAL_EVENTTASK
