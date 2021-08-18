@@ -24,8 +24,9 @@ protected:
 	ThreadPool *threadpool;
 	ServerSocket *listenSocket;
 	HTTPServerParams *params;
-	bool _isSSL;
 public:
+	bool _isSSL;
+
 	CLASS(std::string taskName);
 	virtual ~CLASS();
 	bool isSSL() { return _isSSL;};
@@ -41,7 +42,7 @@ public:
 class HTTPREQ_CLASS : public HTTPRequestHandler
 {
 protected:
-	PAL_HTTPSERVERTASK *server;
+	PAL_HTTPSERVERTASK &server;
 	std::string theuri;
 	std::string dir;
 	std::string docroot;
@@ -52,7 +53,7 @@ protected:
 	std::string webPath;
 	std::string appPath;
 public:
-	HTTPREQ_CLASS(PAL_HTTPSERVERTASK *_server);
+	HTTPREQ_CLASS(PAL_HTTPSERVERTASK &_server);
 
 	virtual void handlePOST(std::string &method,HTTPServerRequest & req, HTTPServerResponse &resp);
 	virtual void handleGET(std::string &method,HTTPServerRequest & req, HTTPServerResponse &resp);
@@ -63,10 +64,10 @@ public:
 class PAL_HTTPREQUESTFACTORY : public HTTPRequestHandlerFactory
 {
 protected:
-	PAL_HTTPSERVERTASK *server;
+	PAL_HTTPSERVERTASK &server;
 
 public:
-	PAL_HTTPREQUESTFACTORY(PAL_HTTPSERVERTASK *_server);
+	PAL_HTTPREQUESTFACTORY(PAL_HTTPSERVERTASK &_server);
 	virtual HTTPRequestHandler* createRequestHandler(const HTTPServerRequest &);
 };
 

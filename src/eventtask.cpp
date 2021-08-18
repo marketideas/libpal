@@ -41,6 +41,9 @@ void CLASS::handleMessage(Notification::Ptr note)
 			case WM_TIMER:
 				onTimer();
 				break;
+			case WM_TICK:
+				onTick();
+				break;
 			case WM_IDLE:
 				onIdle();
 				break;
@@ -94,6 +97,10 @@ void CLASS::onOneDay(void)
 }
 
 void CLASS::onTimer(void)
+{
+
+}
+void CLASS::onTick(void)
 {
 
 }

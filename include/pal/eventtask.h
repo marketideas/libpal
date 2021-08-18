@@ -37,7 +37,7 @@ public:
 
 	enum WM_MESSAGE
 	{
-		WM_NULL = 0, WM_IDLE,WM_TIMER, WM_KEYPRESS, WM_ONESECOND, WM_ONEMINUTE, WM_ONEHOUR,WM_ONEDAY, WM_RELOAD,
+		WM_NULL = 0, WM_IDLE,WM_TIMER,WM_TICK, WM_KEYPRESS, WM_ONESECOND, WM_ONEMINUTE, WM_ONEHOUR,WM_ONEDAY, WM_RELOAD,
 		WM_QUIT, WM_USER,
 		WM_MAXMESSAGE
 	};
@@ -67,6 +67,7 @@ public:
 
 
 	// message handler methods
+	virtual void onTick(void);
 	virtual void onOneSecond(void);
 	virtual void onOneMinute(void);
 	virtual void onOneHour(void);

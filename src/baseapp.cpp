@@ -240,7 +240,7 @@ void CLASS::initialize(Application & self)
         }
         else
         {
-           //cout << "option config " << f << endl;
+            //cout << "option config " << f << endl;
             try
             {
                 if (isDebug() > 1)
@@ -406,7 +406,8 @@ int CLASS::runApp(void)
                         }
                         else
                         {
-#if 1
+                            evtManager->SendMessageToAll(Notification::Ptr(new PAL_MESSAGE(PAL_EVENTTASK::WM_TICK)));
+
                             tick = GetTickCount();
                             if (tick >= (lasttick + 1000))
                             {
@@ -432,20 +433,18 @@ int CLASS::runApp(void)
 
                                 daytick = tick;
                             }
-#endif
-
                             char ch = getKey();
                             if (ch > 0)
                             {
                                 switch (ch)
                                 {
-                                    default:
-                                        evtManager->SendMessageToAll(Notification::Ptr(new PAL_MESSAGE(PAL_EVENTTASK::WM_KEYPRESS, ch, 0, NULL)));
-                                        break;
-                                    case 'Q':
-                                    case 'q':
-                                        appstop = true;
-                                        break;
+                                default:
+                                    evtManager->SendMessageToAll(Notification::Ptr(new PAL_MESSAGE(PAL_EVENTTASK::WM_KEYPRESS, ch, 0, NULL)));
+                                    break;
+                                case 'Q':
+                                case 'q':
+                                    appstop = true;
+                                    break;
                                 }
                             }
                         }

@@ -10,7 +10,7 @@
 namespace PAL_NAMESPACE
 {
 
-PAL_HTTPREQUESTFACTORY::PAL_HTTPREQUESTFACTORY(PAL_HTTPSERVERTASK *_server) : server(_server)
+PAL_HTTPREQUESTFACTORY::PAL_HTTPREQUESTFACTORY(PAL_HTTPSERVERTASK &_server) : server(_server)
 {
 
 }
@@ -21,9 +21,8 @@ HTTPRequestHandler* PAL_HTTPREQUESTFACTORY::createRequestHandler(const HTTPServe
 }
 
 
-HTTPREQ_CLASS::HTTPREQ_CLASS(PAL_HTTPSERVERTASK *_server) : app(Poco::Util::Application::instance())
+HTTPREQ_CLASS::HTTPREQ_CLASS(PAL_HTTPSERVERTASK &_server) : server(_server),app(Poco::Util::Application::instance())
 {
-    server=_server;
 }
 
 void HTTPREQ_CLASS::handlePOST(std::string &method, HTTPServerRequest & req, HTTPServerResponse &resp)
@@ -57,16 +56,63 @@ void HTTPREQ_CLASS::handleGateway(std::string uri, std::string &method, HTTPServ
 
 void HTTPREQ_CLASS::handleRequest(HTTPServerRequest &req, HTTPServerResponse &resp)
 {
-    int tid=Poco::Thread::currentTid();
+    uint32_t tid=Poco::Thread::currentTid();
     std::string client=req.clientAddress().host().toString();
     std::string secure=req.secure()?"SSL":"HTTP";
     std::string method=Poco::toUpper(req.getMethod());
 
-    LOG_DEBUG << "Request( " <<method<<"):" << secure << " host: " << client << " thread: " << tid << endl;
-
-    if ((server->isSSL()) && (!req.secure()))
+    theuri=req.getURI();
+    if (theuri=="")
     {
-        LOG_DEBUG << "redirecting: " << endl;
+        theuri="/";
+    }
+
+
+    std::string hostname;
+    try
+    {
+        hostname=req.getHost();
+        Poco::StringTokenizer tok(hostname,":",Poco::StringTokenizer::TOK_IGNORE_EMPTY|Poco::StringTokenizer::TOK_TRIM);
+        if (tok.count()>0)
+        {
+            hostname=tok[0];
+        }
+        else
+        {
+            hostname="";
+        }
+
+    }
+    catch(...)
+    {
+        hostname="";
+    }
+
+    LOG_DEBUG << "Request(" <<method<<"):" << secure << " client: " << client << " host: " << hostname << " uri: " << theuri << " thread: " << tid << endl;
+
+    if ((server.isSSL()) && (!req.secure()))
+    {
+        std::string p="";
+        int port=getInt("https.port",443);
+        if (port!=443)
+        {
+            p=":"+Poco::NumberFormatter::format(port);
+        }
+
+        //hostname="";
+        if (hostname!="")
+        {
+            std::string r="https://"+hostname+p+theuri;
+            //LOG_DEBUG << "redirecting: " << r << endl;
+            resp.redirect(r,HTTPResponse::HTTP_MOVED_PERMANENTLY);
+        }
+        else
+        {
+            //LOG_DEBUG << "forbidden" << endl;
+            resp.setStatusAndReason(HTTPResponse::HTTP_BAD_REQUEST,"404 NOT FOUND");
+            ostream &out = resp.send();
+            out.flush();
+        }
         return;
     }
 
@@ -87,6 +133,7 @@ CLASS::CLASS(std::string taskName) : BASECLASS(taskName)
     listenSocket = NULL;
     _isSSL = false;
     server = NULL;
+    LOG_DEBUG << "server created" << endl;
 }
 
 CLASS::~CLASS()
@@ -124,10 +171,6 @@ CLASS::~CLASS()
         delete(listenSocket);
         listenSocket = NULL;
     }
-    if (isSSL())
-    {
-        Poco::Net::uninitializeSSL();
-    }
 }
 
 void CLASS::initServer(std::string listenstr, bool ssl, int numTasks)
@@ -161,6 +204,7 @@ void CLASS::initServer(std::string listenstr, bool ssl, int numTasks)
         _isSSL=true;
         Poco::Net::initializeSSL();
         ReloadSSL();
+        _isSSL=true;
         listenSocket = new Poco::Net::SecureServerSocket(SocketAddress(listenstr), numTasks);
 
 #else
@@ -173,7 +217,7 @@ void CLASS::initServer(std::string listenstr, bool ssl, int numTasks)
     }
     if ((threadpool != NULL) && (listenSocket != NULL) && (params != NULL))
     {
-        server  = new Poco::Net::HTTPServer(new PAL_HTTPREQUESTFACTORY(this),
+        server  = new Poco::Net::HTTPServer(new PAL_HTTPREQUESTFACTORY(*this),
                                             *threadpool, *listenSocket, params);
         server->start();
         LOG_DEBUG << "httpserver started (" << name() << ")" << endl;

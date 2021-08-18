@@ -2,6 +2,11 @@
 
 #include "palPoco.h"
 
+
+#define FREEANDNIL(x) \
+  if (x!=NULL) { delete(x); x=NULL;}
+  
+
 namespace PAL_NAMESPACE {
 
 enum {
