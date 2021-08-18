@@ -53,6 +53,7 @@ protected:
 	uint64_t timermax, timerval;
 
 	virtual void init();
+	virtual void doEvents(void);
 
 
 public:

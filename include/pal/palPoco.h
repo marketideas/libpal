@@ -32,6 +32,7 @@
 #include <Poco/NumberFormatter.h>
 #include <Poco/Random.h>
 #include <Poco/RandomStream.h>
+#include <Poco/Dynamic/Var.h>
 
 #ifndef NO_SIGNAL_HANDLING
 #include <Poco/SignalHandler.h>

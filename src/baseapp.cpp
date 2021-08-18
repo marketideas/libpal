@@ -398,7 +398,7 @@ int CLASS::runApp(void)
                     bool appstop = false;
                     while (!appstop)
                     {
-                        usleep(100 * 1000);
+                        usleep(10 * 1000);
                         if (tm.count() == 0) // if the eventmanager task has shutdown, there is a fatal error
                         {
                             res = Poco::Util::Application::EXIT_SOFTWARE;
