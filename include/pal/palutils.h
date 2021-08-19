@@ -41,6 +41,12 @@ enum {
 #define CL_BOLD 0x08
 #define BG_BOLD 0x80
 
+#define NC std::string("\e[0m")
+#define RED "\e[0;31m"
+#define GRN std::string("\e[0;32m")
+#define CYN "\e[0;36m"
+#define REDB "\e[41m"
+
 std::string getEnv(std::string name, std::string dflt);
 std::string getConfig(std::string key, std::string dflt);
 bool toBool(std::string str);

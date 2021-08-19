@@ -1,5 +1,5 @@
 #pragma once
-#include "config.h"
+#include "app_config.h"
 #include "pal_config.h"
 
 #define UNUSED(expr) do { (void)(expr); } while (0)
@@ -180,9 +180,15 @@
 
 using namespace std;
 using namespace Poco;
+using namespace Poco::Util;
+using namespace Poco::Dynamic;
 #ifdef USE_NET
 using namespace Poco::Net;
 #endif
+#ifdef USE_JSON
+using namespace Poco::JSON;
+#endif
+
 //using namespace Poco::Crypto;
 
 using Poco::format;

@@ -238,9 +238,9 @@ void CLASS::ReloadSSL(void)
             std::string keyfile = getConfig("openSSL.server.privateKeyFile", "");
             std::string chainfile = getConfig("openSSL.server.caConfig", "");
 
-            LOG_DEBUG << "certfile: " << certfile << endl;
-            LOG_DEBUG << "keyfile: " << keyfile << endl;
-            LOG_DEBUG << "chainfile: " << chainfile << endl;
+            //LOG_DEBUG << "certfile: " << certfile << endl;
+            //LOG_DEBUG << "keyfile: " << keyfile << endl;
+            //LOG_DEBUG << "chainfile: " << chainfile << endl;
 
 
             SSLManager &ssl = SSLManager::instance();
@@ -257,7 +257,7 @@ void CLASS::ReloadSSL(void)
 
                 ctx->useCertificate(cert);
                 ctx->usePrivateKey(key);
-                LOG_NOTE << "new SSL cert file loaded" << endl;
+                //LOG_NOTE << "new SSL cert file loaded" << endl;
             }
         }
         catch (Poco::Exception &e)

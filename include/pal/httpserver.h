@@ -1,6 +1,4 @@
 #pragma once
-#include "config.h"
-#include "pal_config.h"
 #include "palPoco.h"
 #include "eventtask.h"
 

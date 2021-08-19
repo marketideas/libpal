@@ -54,6 +54,7 @@ namespace PAL_NAMESPACE
 class CLASS
 {
 #ifdef USE_LOGGER
+
 private:
 	mutable FastMutex _mutex;
 protected:
