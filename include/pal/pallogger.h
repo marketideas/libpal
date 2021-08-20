@@ -50,7 +50,6 @@ namespace PAL_NAMESPACE
 #define LOG_DEBUG  LOG_BASE(7,__FILE__,__LINE__)
 #define LOG_TRACE  LOG_BASE(8,__FILE__,__LINE__)
 
-
 class CLASS
 {
 #ifdef USE_LOGGER
@@ -107,5 +106,6 @@ extern CLASS *palloginstance;
 CLASS *palloginstance = NULL;
 //Poco::NullOutputStream lognullstream;
 #endif
+
 #undef CLASS
 }

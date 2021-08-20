@@ -4,8 +4,6 @@
 
 #define CLASS PAL_EVENTTASK
 
-using namespace PAL_NAMESPACE;
-
 namespace PAL_NAMESPACE
 {
 

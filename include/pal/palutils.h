@@ -58,6 +58,8 @@ std::string getLibVersion(void);
 std::string getPocoVersion(void);
 int isDebug(void);
 uint8_t SetColor(uint8_t icolor);
+string GetJSONValue(Object::Ptr aoJsonObject, const char *aszKey);
+Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey);
 
 std::string getTimeAsString(void);
 

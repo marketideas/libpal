@@ -7,7 +7,6 @@
 #undef CLASS
 #define CLASS PAL_HTTPCLIENTTASK
 
-using namespace PAL_NAMESPACE;
 namespace PAL_NAMESPACE {
 
 class CLASS : public PAL_EVENTTASK

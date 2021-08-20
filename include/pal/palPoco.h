@@ -33,6 +33,7 @@
 #include <Poco/Random.h>
 #include <Poco/RandomStream.h>
 #include <Poco/Dynamic/Var.h>
+#include <Poco/Delegate.h>
 
 #ifndef NO_SIGNAL_HANDLING
 #include <Poco/SignalHandler.h>
@@ -81,6 +82,7 @@
 #ifdef USE_JSON
 #include <Poco/JSON/JSON.h>
 #include <Poco/JSON/Parser.h>
+#include <Poco/JSON/Array.h>
 #include <Poco/JSON/PrintHandler.h>
 #include <Poco/JSON/Stringifier.h>
 #endif
@@ -204,6 +206,7 @@ using Poco::DateTimeFormatter;
 using Poco::RegularExpression;
 using Poco::Message;
 using Poco::AutoPtr;
+
 
 typedef std::map<std::string,std::string> TValueMap;
 

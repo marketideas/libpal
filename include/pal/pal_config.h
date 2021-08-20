@@ -23,3 +23,9 @@
 #undef RELEASE
 #define RELEASE
 #endif
+
+namespace PAL_NAMESPACE
+{
+
+}
+using namespace PAL_NAMESPACE;
