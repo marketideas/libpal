@@ -62,6 +62,7 @@ string GetJSONValue(Object::Ptr aoJsonObject, const char *aszKey);
 Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey);
 
 std::string getTimeAsString(void);
+std::string base64Decode(std::string instr);
 
 bool changeOwner(std::string filename, std::string userstr, std::string groupstr);
 bool changePermissions(std::string filename, uint32_t permissions);

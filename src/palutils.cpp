@@ -417,15 +417,12 @@ uint8_t SetColor(uint8_t icolor)
 Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey)
 {
     Poco::Dynamic::Var loVariable;
-    //string lsReturn="";
     string lsKey(aszKey);
     size_t i,ct;
 
     loVariable.clear();
     try
     {
-        // Get the member Variable
-        //
         Poco::StringTokenizer tok(lsKey,".");
         ct=tok.count();
         for (i=0; i<ct; i++)
@@ -441,9 +438,13 @@ Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey)
             }
         }
     }
-    catch(...)
+    catch(Poco::Exception &e)
     {
-        cout << "json exception" << endl;
+        LOG_DEBUG << "json exception: " << e.displayText() << e.message() << endl;
+    }
+    catch(std::exception &e)
+    {
+        LOG_DEBUG << "json exception: " << e.what() << endl;
     }
     return loVariable;
 }
@@ -454,8 +455,26 @@ string GetJSONValue(Object::Ptr aoJsonObject, const char *aszKey)
     Var val;
 
     val=GetJSONObject(aoJsonObject,aszKey);
-    res=val.convert<std::string>();
+    if (val.size()>0)
+        res=val.convert<std::string>();
     return (res);
 }
+
+std::string base64Decode(std::string instr)
+{
+    std::string res="";
+
+    istringstream istr(instr);
+    ostringstream ostr;
+    Base64Decoder d64(istr);
+
+    copy(std::istreambuf_iterator<char>(d64),
+         std::istreambuf_iterator<char>(),
+         std::ostreambuf_iterator<char>(ostr));
+    res=ostr.str();
+
+    return(res);
+}
+
 
 }
