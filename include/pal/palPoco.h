@@ -30,6 +30,10 @@
 #include <Poco/StringTokenizer.h>
 #include <Poco/NumberParser.h>
 #include <Poco/NumberFormatter.h>
+#include <Poco/Timestamp.h>
+#include <Poco/Timezone.h>
+#include <Poco/DateTimeFormatter.h>
+#include <Poco/DateTimeFormat.h>
 #include <Poco/Random.h>
 #include <Poco/RandomStream.h>
 #include <Poco/Dynamic/Var.h>
