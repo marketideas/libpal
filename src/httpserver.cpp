@@ -1,7 +1,7 @@
-#include "httpserver.h"
-#include "app.h"
-
+#include "pal.h"
 #ifdef USE_NET
+#include "httpserver.h"
+
 
 #define BASECLASS PAL_EVENTTASK
 #define CLASS PAL_HTTPSERVERTASK

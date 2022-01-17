@@ -1,5 +1,7 @@
 // this line indicates to the .h file that this is the source file
 #define PAL_LOGGER_C
+#include "pal.h"
+#ifdef USE_LOGGER
 
 #include "pallogger.h"
 #include "baseapp.h"
@@ -361,3 +363,4 @@ std::ostream& CLASS::logstream(int outlevel, const char *file, const int line)
 Poco::NullOutputStream CLASS::lognullstream;
 
 }
+#endif

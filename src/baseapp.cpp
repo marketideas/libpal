@@ -9,17 +9,23 @@ namespace PAL_NAMESPACE
 
 CLASS::CLASS()
 {
+#ifdef SERVERAPP
     evtManager = NULL;
+#endif
+#ifdef USE_LOGGER
     pallogger = NULL;
+#endif
 }
 
 CLASS::~CLASS()
 {
+#ifdef USE_LOGGER
     if (pallogger != NULL)
     {
         delete(pallogger);
         pallogger = NULL;
     }
+#endif
 }
 
 void CLASS::uninitialize()
@@ -269,8 +275,10 @@ void CLASS::initialize(Application & self)
         std::string tz = getConfig("application.timezone", tz1);
         Poco::Environment::set("TZ", tz);
 
+#ifdef USE_LOGGER
         pallogger = new PAL_LOGGER();
         pallogger->enable(true);
+#endif
         //LOG_DEBUG << "tz=" << tz << endl;
     }
     catch (...)
@@ -348,6 +356,7 @@ int CLASS::runCommandLineApp(void)
     return (0);
 }
 
+#ifdef SERVERAPP
 int CLASS::runServerApp(PAL_EVENTMANAGER * em)
 {
     if (em)
@@ -356,6 +365,7 @@ int CLASS::runServerApp(PAL_EVENTMANAGER * em)
     // override this class to create your EventTasks
     return (-1);
 }
+#endif
 
 int CLASS::runApp(void)
 {

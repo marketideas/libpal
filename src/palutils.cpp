@@ -8,7 +8,7 @@ namespace PAL_NAMESPACE
 Poco::NullOutputStream nullstream;
 
 //#define LOG_DEBUG nullstream
-#define LOG_DEBUG cout
+//#define LOG_DEBUG cout
 
 int isDebug(void)
 {
@@ -413,6 +413,7 @@ uint8_t SetColor(uint8_t icolor)
     return (res);
 }
 
+#ifdef USE_JSON
 
 Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey)
 {
@@ -459,6 +460,7 @@ string GetJSONValue(Object::Ptr aoJsonObject, const char *aszKey)
         res=val.convert<std::string>();
     return (res);
 }
+#endif
 
 std::string base64Decode(std::string instr)
 {

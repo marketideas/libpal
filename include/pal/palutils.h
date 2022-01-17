@@ -1,4 +1,5 @@
 #pragma once
+#include "pal.h"
 
 #include "palPoco.h"
 
@@ -58,8 +59,10 @@ std::string getLibVersion(void);
 std::string getPocoVersion(void);
 int isDebug(void);
 uint8_t SetColor(uint8_t icolor);
+#ifdef USE_JSON
 string GetJSONValue(Object::Ptr aoJsonObject, const char *aszKey);
 Dynamic::Var GetJSONObject(Object::Ptr aoJsonObject, const char *aszKey);
+#endif
 
 std::string getTimeAsString(void);
 std::string base64Decode(std::string instr);

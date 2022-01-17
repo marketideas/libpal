@@ -1,6 +1,8 @@
 #pragma once
 
-#include "palPoco.h"
+
+#undef CLASS
+#define CLASS PAL_LOGGER
 
 // Logging includes
 #include <Poco/Logger.h>
@@ -13,10 +15,8 @@
 #include <Poco/AsyncChannel.h>
 #include <Poco/SimpleFileChannel.h>
 #include <Poco/PatternFormatter.h>
-#include "palutils.h"
 
-#undef CLASS
-#define CLASS PAL_LOGGER
+
 
 using Poco::Logger;
 using Poco::FileChannel;
@@ -35,6 +35,7 @@ namespace PAL_NAMESPACE
 #define LOG_STDERR  std::cerr
 
 #ifdef USE_LOGGER
+//#pragma message "USE_LOGGER"
 #define LOG_BASE(x,y,z) PAL_LOGGER::logstream(x,y,z)
 #else
 //#define LOG_BASE(x,y,z) PAL_LOGGER::logstream(-1,y,z)
@@ -107,5 +108,5 @@ CLASS *palloginstance = NULL;
 //Poco::NullOutputStream lognullstream;
 #endif
 
-#undef CLASS
 }
+#undef CLASS
