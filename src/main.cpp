@@ -2,8 +2,6 @@
 #include "palPoco.h"
 #include "baseapp.h"
 
-using namespace PAL_NAMESPACE;
-
 int main(int argc, char **argv)
 {
 	int x;

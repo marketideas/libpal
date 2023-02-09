@@ -6,7 +6,6 @@
 #include <httpserver.h>
 
 #define CLASS PAL_APPCLASS
-using namespace PAL_NAMESPACE;
 
 class CLASS : public PAL_BASEAPP
 {

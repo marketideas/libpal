@@ -15,7 +15,7 @@
 #define PAL_HTTPCLIENTTASK THttpClientTask
 
 #ifndef PAL_APPCLASS
-#warning "PAL_APPCLASS is undefined. define it in config.h"
+#warning "PAL_APPCLASS is undefined. define it in app_config.h"
 #define PAL_APPCLASS TPALCustomApplication
 #endif
 
@@ -23,3 +23,9 @@
 #undef RELEASE
 #define RELEASE
 #endif
+
+namespace PAL_NAMESPACE
+{
+
+}
+using namespace PAL_NAMESPACE;

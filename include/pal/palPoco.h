@@ -1,5 +1,5 @@
 #pragma once
-#include "config.h"
+#include "app_config.h"
 #include "pal_config.h"
 
 #define UNUSED(expr) do { (void)(expr); } while (0)
@@ -30,8 +30,14 @@
 #include <Poco/StringTokenizer.h>
 #include <Poco/NumberParser.h>
 #include <Poco/NumberFormatter.h>
+#include <Poco/Timestamp.h>
+#include <Poco/Timezone.h>
+#include <Poco/DateTimeFormatter.h>
+#include <Poco/DateTimeFormat.h>
 #include <Poco/Random.h>
 #include <Poco/RandomStream.h>
+#include <Poco/Dynamic/Var.h>
+#include <Poco/Delegate.h>
 
 #ifndef NO_SIGNAL_HANDLING
 #include <Poco/SignalHandler.h>
@@ -80,8 +86,11 @@
 #ifdef USE_JSON
 #include <Poco/JSON/JSON.h>
 #include <Poco/JSON/Parser.h>
+#include <Poco/JSON/Array.h>
 #include <Poco/JSON/PrintHandler.h>
 #include <Poco/JSON/Stringifier.h>
+#include <Poco/JSON/Query.h>
+
 #endif
 
 #ifdef USE_NET
@@ -111,6 +120,8 @@
 #include <Poco/Util/OptionSet.h>
 #include <Poco/Util/OptionCallback.h>
 #include <Poco/Util/HelpFormatter.h>
+#include <Poco/Util/JSONConfiguration.h>
+
 #include <Poco/Task.h>
 #include <Poco/TaskNotification.h>
 #include <Poco/TaskManager.h>
@@ -179,9 +190,15 @@
 
 using namespace std;
 using namespace Poco;
+using namespace Poco::Util;
+using namespace Poco::Dynamic;
 #ifdef USE_NET
 using namespace Poco::Net;
 #endif
+#ifdef USE_JSON
+using namespace Poco::JSON;
+#endif
+
 //using namespace Poco::Crypto;
 
 using Poco::format;
@@ -197,6 +214,7 @@ using Poco::DateTimeFormatter;
 using Poco::RegularExpression;
 using Poco::Message;
 using Poco::AutoPtr;
+
 
 typedef std::map<std::string,std::string> TValueMap;
 

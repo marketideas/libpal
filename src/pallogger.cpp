@@ -1,5 +1,7 @@
 // this line indicates to the .h file that this is the source file
 #define PAL_LOGGER_C
+#include "pal.h"
+#ifdef USE_LOGGER
 
 #include "pallogger.h"
 #include "baseapp.h"
@@ -10,8 +12,6 @@
 
 
 namespace PAL_NAMESPACE {
-
-#ifdef USE_LOGGER
 
 bool CLASS::enabled;
 
@@ -53,12 +53,16 @@ std::string CLASS::createLogFile(std::string path)
 	std::string  groupstr;
 	std::string logfilename, logdirname;
 
+#ifdef NO_DISK_LOG
+	return("");
+#else
 	tmpstr=path;
 	tmpstr = getEnv("NO_DISK_LOG", "");
-	if ((tmpstr != "") || (!getBool("log.disklog", false)))
+	if ((tmpstr != "") || (!getBool("log.disklog", true)))
 	{
 		return (""); // no disk logging if this environment var set to anything
 	}
+#endif
 
 	cuserstr = "";
 	uid = geteuid();
@@ -259,6 +263,7 @@ void CLASS::init()
 	}
 	catch (...)
 	{
+		lev="";
 	}
 	if (lev == "")
 	{
@@ -356,7 +361,7 @@ std::ostream& CLASS::logstream(int outlevel, const char *file, const int line)
 	//thelogstream << "[" << f << ":" << line << "]: ";
 	return (palloginstance->thelogstream);
 }
-#endif
 Poco::NullOutputStream CLASS::lognullstream;
 
 }
+#endif

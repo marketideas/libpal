@@ -1,7 +1,6 @@
 #pragma once
 
-#include "palPoco.h"
-
+#include "pal.h"
 #include <sys/time.h>
 #ifndef NO_SIGNAL_HANDLING
 #include <sys/timerfd.h>
@@ -10,10 +9,8 @@
 #include <stdexcept>
 #include <termios.h>
 #include <signal.h>
-#include "palutils.h"
-#include "pallogger.h"
-#include "eventtask.h"
 
+#undef CLASS
 #define CLASS PAL_BASEAPP
 
 #ifdef NO_SIGNAL_HANDLING
@@ -43,6 +40,7 @@ typedef struct {
 } programOption;
 
 extern programOption appOptions[];
+
 
 class TQA_SignalHandler : public Poco::SignalHandler
 {
@@ -89,19 +87,28 @@ public:
 class CLASS : public POCOAPP_CLASS
 {
 private:
+#ifndef NOT_TTY_SETUP
 	struct termios oldSettings, newSettings;
-
+#endif
 	void ResetTerminal(void);
 	void SetTerminal(void);
 
 protected:
+	uint64_t daytick,lasttick,mintick,hourtick,tick;
+	bool initFailed;
+#ifdef USE_LOGGER
 	PAL_LOGGER  *pallogger;
+#endif
+#ifdef SERVERAPP
 	PAL_EVENTMANAGER *evtManager;
+#endif
 	ArgVec commandargs;
 
 	virtual int runApp(void);
 	virtual int runCommandLineApp(void);
+#ifdef SERVERAPP
 	virtual int runServerApp(PAL_EVENTMANAGER *em);
+#endif
 
 	char getKey(void);
 
@@ -126,5 +133,5 @@ protected:
 };
 
 
-#undef CLASS
 }
+#undef CLASS

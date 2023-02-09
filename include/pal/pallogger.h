@@ -1,6 +1,8 @@
 #pragma once
 
-#include "palPoco.h"
+
+#undef CLASS
+#define CLASS PAL_LOGGER
 
 // Logging includes
 #include <Poco/Logger.h>
@@ -13,10 +15,8 @@
 #include <Poco/AsyncChannel.h>
 #include <Poco/SimpleFileChannel.h>
 #include <Poco/PatternFormatter.h>
-#include "palutils.h"
 
-#undef CLASS
-#define CLASS PAL_LOGGER
+
 
 using Poco::Logger;
 using Poco::FileChannel;
@@ -29,17 +29,21 @@ namespace PAL_NAMESPACE
 {
 
 
-#define LOG_SYSLOG   cout
-#define LOG_CONSOLE  cout
-#define LOG_STDOUT  cout
-#define LOG_STDERR  cerr
+#define LOG_SYSLOG   std::cout
+#define LOG_CONSOLE  std::cout
+#define LOG_STDOUT  std::cout
+#define LOG_STDERR  std::cerr
 
 #ifdef USE_LOGGER
+//#pragma message "USE_LOGGER"
 #define LOG_BASE(x,y,z) PAL_LOGGER::logstream(x,y,z)
 #else
 //#define LOG_BASE(x,y,z) PAL_LOGGER::logstream(-1,y,z)
-#define LOG_BASE(x,y,z) LOG_STDERR
+#define LOG_BASE(x,y,z) LOG_STDOUT
 #endif
+
+#define endl std::string("\n")
+//#define endl string(std::endl)
 
 #define LOG_FATAL  LOG_BASE(1,__FILE__,__LINE__)
 #define LOG_CRIT  LOG_BASE(2,__FILE__,__LINE__)
@@ -50,10 +54,10 @@ namespace PAL_NAMESPACE
 #define LOG_DEBUG  LOG_BASE(7,__FILE__,__LINE__)
 #define LOG_TRACE  LOG_BASE(8,__FILE__,__LINE__)
 
-
 class CLASS
 {
 #ifdef USE_LOGGER
+
 private:
 	mutable FastMutex _mutex;
 protected:
@@ -106,5 +110,6 @@ extern CLASS *palloginstance;
 CLASS *palloginstance = NULL;
 //Poco::NullOutputStream lognullstream;
 #endif
-#undef CLASS
+
 }
+#undef CLASS
