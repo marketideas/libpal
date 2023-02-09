@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
+project(libpal)
+
+
 set (CMAKE_CXX_STANDARD 11)
+
+set ( PROJECT_NAME "libpal" )
 
 set(LIBRARY_NAME "pal")
 set(LIBVERSION "2.0.0")
@@ -38,8 +43,8 @@ set(SOURCE
   ${PROJECT_ROOT}/src/pallogger.cpp
   ${PROJECT_ROOT}/src/eventtask.cpp
   ${PROJECT_ROOT}/src/palutils.cpp
-  ${PROJECT_ROOT}/src/httpserver.cpp
-  ${PROJECT_ROOT}/src/httpclient.cpp
+  #${PROJECT_ROOT}/src/httpserver.cpp
+  #${PROJECT_ROOT}/src/httpclient.cpp
 )
 
 include_directories(BEFORE 

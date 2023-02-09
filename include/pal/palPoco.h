@@ -89,6 +89,8 @@
 #include <Poco/JSON/Array.h>
 #include <Poco/JSON/PrintHandler.h>
 #include <Poco/JSON/Stringifier.h>
+#include <Poco/JSON/Query.h>
+
 #endif
 
 #ifdef USE_NET
@@ -118,6 +120,8 @@
 #include <Poco/Util/OptionSet.h>
 #include <Poco/Util/OptionCallback.h>
 #include <Poco/Util/HelpFormatter.h>
+#include <Poco/Util/JSONConfiguration.h>
+
 #include <Poco/Task.h>
 #include <Poco/TaskNotification.h>
 #include <Poco/TaskManager.h>

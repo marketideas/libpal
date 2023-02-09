@@ -42,6 +42,9 @@ namespace PAL_NAMESPACE
 #define LOG_BASE(x,y,z) LOG_STDOUT
 #endif
 
+#define endl std::string("\n")
+//#define endl string(std::endl)
+
 #define LOG_FATAL  LOG_BASE(1,__FILE__,__LINE__)
 #define LOG_CRIT  LOG_BASE(2,__FILE__,__LINE__)
 #define LOG_ERROR  LOG_BASE(3,__FILE__,__LINE__)

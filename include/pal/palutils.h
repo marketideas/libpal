@@ -53,6 +53,7 @@ std::string getConfig(std::string key, std::string dflt);
 bool toBool(std::string str);
 bool getBool(std::string key, bool dflt);
 int getInt(std::string key, int dflt);
+string getString(std::string key, string dflt);
 uint64_t GetTickCount();
 std::string SubstEnvironment(std::string instr);
 std::string getLibVersion(void);

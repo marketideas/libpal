@@ -13,8 +13,6 @@
 
 namespace PAL_NAMESPACE {
 
-#ifdef USE_LOGGER
-
 bool CLASS::enabled;
 
 CLASS::CLASS() :
@@ -55,12 +53,16 @@ std::string CLASS::createLogFile(std::string path)
 	std::string  groupstr;
 	std::string logfilename, logdirname;
 
+#ifdef NO_DISK_LOG
+	return("");
+#else
 	tmpstr=path;
 	tmpstr = getEnv("NO_DISK_LOG", "");
-	if ((tmpstr != "") || (!getBool("log.disklog", false)))
+	if ((tmpstr != "") || (!getBool("log.disklog", true)))
 	{
 		return (""); // no disk logging if this environment var set to anything
 	}
+#endif
 
 	cuserstr = "";
 	uid = geteuid();
@@ -359,7 +361,6 @@ std::ostream& CLASS::logstream(int outlevel, const char *file, const int line)
 	//thelogstream << "[" << f << ":" << line << "]: ";
 	return (palloginstance->thelogstream);
 }
-#endif
 Poco::NullOutputStream CLASS::lognullstream;
 
 }
